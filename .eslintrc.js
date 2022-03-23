@@ -3,6 +3,13 @@ module.exports = {
 
   extends: ['@metamask/eslint-config'],
 
+  parserOptions: {
+    ecmaVersion: 6,
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+    },
+  },
+
   overrides: [
     {
       files: ['*.js'],

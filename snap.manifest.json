@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.3",
   "proposedName": "RealID Snap",
   "description": "A RealID Snap.",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/AuthenticID-Labs/real-id-snap.git"
   },
   "source": {
-    "shasum": "ugRI+2ippw2w2gNSGWpvCRu5L1LD2j4FWQ+KcO/1dIE=",
+    "shasum": "WKK2xNCEahGEjKiS1muTcGpMOqozfVqFUQLwHt64yY0=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -18,7 +18,12 @@
     }
   },
   "initialPermissions": {
-    "snap_confirm": {}
+    "snap_confirm": {},
+    "eth_accounts": {
+      "requiredMethods": [
+        "eth_decrypt"
+      ]
+    }
   },
   "manifestVersion": "0.1"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@authenticid-labs/real-id-snap",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "RealID Merkle Proof Snap.",
   "repository": {
     "type": "git",
@@ -48,5 +48,9 @@
   },
   "engines": {
     "node": ">=12.11.0"
+  },
+  "dependencies": {
+    "ethers": "^5.6.1",
+    "merkletreejs": "^0.2.31"
   }
 }
