@@ -24,24 +24,17 @@
     <br/>
 
     <button class="connect">Connect</button>
-    <button class="getAddress">Get Address</button>
-    <button class="sendHello">Send Hello</button>
     <button class="sendDecrypt">Generate Merkle Proof</button>
   </body>
 
   <script>
-    console.log(ethereum);
-    //const snapId = `local:${window.location.href}`;
-    const snapId = 'npm:@authenticid-labs/real-id-snap'
+    const snapId = `local:${window.location.href}`;
+    // const snapId = 'npm:@authenticid-labs/real-id-snap'
 
     const connectButton = document.querySelector('button.connect')
-    const sendButton = document.querySelector('button.sendHello')
-    const getAddressButton = document.querySelector('button.getAddress')
     const decryptButton = document.querySelector('button.sendDecrypt')
 
     connectButton.addEventListener('click', connect)
-    sendButton.addEventListener('click', send)
-    getAddressButton.addEventListener('click', getAddress)
     decryptButton.addEventListener('click', decrypt)
 
     async function connect () {
@@ -53,41 +46,6 @@
       })
     }
 
-    async function getAddress () {
-      try {
-        const response = await ethereum.request({
-          method: 'wallet_invokeSnap',
-          params: [snapId, {
-            method: 'address',
-          }]
-        })
-        const msg = `responded ${response}`
-        console.log(msg)
-        alert(msg)
-      } catch (err) {
-        console.error(err)
-        alert('Problem happened: ' + err.message || err)
-      }
-    }
-
-    async function send () {
-      try {
-        const response = await ethereum.request({
-          method: 'wallet_invokeSnap',
-          params: [snapId, {
-            method: 'signMessage',
-            params: ['Hello, world!'],
-          }]
-        })
-        const msg = `responded: ${response}`
-        console.log(msg)
-        alert(msg)
-      } catch (err) {
-        console.error(err)
-        alert('Problem happened: ' + err.message || err)
-      }
-    }
-
     async function decrypt () {
       try {
         const data = '0x7b2276657273696f6e223a227832353531392d7873616c736132302d706f6c7931333035222c226e6f6e6365223a22496b797a6e6e6a31614e46756b434b4377636b522b4b4c70694f353867374f65222c22657068656d5075626c69634b6579223a22555154346c2f6a743943525976544f69756f6a694f67576f6a7078364b664b626b6a4846704d755130514d3d222c2263697068657274657874223a2274786f4a6b496243465562654a6e786c6e31495478644c48306b33507a6e614a4a6647517a4970693231305961674b44655533424b6743766449616d39634b716576734378457a2f736c626d4e2b4a643436334a3345344a35585870797a777a506c41597777616e6f5a7644754c36786e4d683838534637774b696e3238742f66612b6f6f4d675773504e6a4b70726f412f4a526f776345756962645469492f735050586e4941597651412b4a597244412b386649357066516247536237576d6d46594c4c7230524345434d6b394e7664765361537a5341612b696d357644454244666b6f2f334d586173436457456d63676c69387767643648657051425a2b6f4c714d473039705a5732774c46425663497979794c37466a6c6352645158304935726448544a797831617737533973495a6b46327230546a7534417256364c636e4b753832376d366c6564755841575043393376696f4e4d467350766a483257304e33664d6a6f32652b364a54715148734b304961523135465667766672345248667a737144536b452b5833484375387854466162536e4d7a544d5a756468435a503161324e786d7151757032364d6d4b784e71454f764c4c594f50454761466476494d6771574d626e62634b553635482f4d4c32486e302f782b3651454b533375346e7a6c4d4d4e4b51516c355a672f58744737537568345669696e72484d386d485743726f486a2b4c65316c6933653933466d696f762b65525865316a4643726e544b4d6730494f774e377048474c355449493867555550716d703762387966646a704b56436278306f6639572b2b377947686f483343474c533955416869396c5a7148344b3353744e497a673363437266453446394f6e715471425a30413755704e545a71706c524c4a48526f52734a6a6254565a56627a646a727a6d6f4771364e3561383465446b2f5739752f546b30587a314b37777270464242674c416e2f567447694230693251717566447832664f46617a684872794d4e734f5135454c615972536e6b42544d564a3667437a3261644750444b5746526c6a50724d4e5031754738504d37597230364a70704d57615562647944374e4b723834756877416d6d2b4365657a373262662f4f366d7255494d426f58756678776d3879774e4d386873694d377334366245465242614e6b32796c352b4272702f346135304e3461634879754248724b667345526457706c6f5152565871747553586b787a323938666c467776306964777a4544454632775676524f65772b3731356836694250484d35437930426e48413d227d';
@@ -95,7 +53,7 @@
           method: 'wallet_invokeSnap',
           params: [snapId, {
             method: 'decrypt',
-            params: [data, '0x0C0Bd9c93596F6FC9F7E3dd8F53EF73a6759873b', 'HairColor:BROWN'],
+            params: [data, '0x0C0Bd9c93596F6FC9F7E3dd8F53EF73a6759873b', ['EyeColor:BROWN','HairColor:BROWN']],
           }]
         })
         

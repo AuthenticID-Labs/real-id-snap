@@ -1,5 +1,5 @@
 {
-  "version": "0.0.5",
+  "version": "0.0.6",
   "proposedName": "RealID Snap",
   "description": "A RealID Snap.",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/AuthenticID-Labs/real-id-snap.git"
   },
   "source": {
-    "shasum": "WKK2xNCEahGEjKiS1muTcGpMOqozfVqFUQLwHt64yY0=",
+    "shasum": "91EZMHYgFZLbmbuTNgGl50UTU0C2ooO/SkxfHOYg7DQ=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",

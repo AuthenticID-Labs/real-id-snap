@@ -21,20 +21,6 @@ wallet.registerRpcMessageHandler(async (_originString, requestObject) => {
   console.dir(ethWallet);
 
   switch (requestObject.method) {
-    case 'address':
-      return ethWallet.address;
-
-    case 'signMessage': {
-      const message = requestObject.params[0];
-      console.log('trying to sign message', message);
-      return ethWallet.signMessage(message);
-    }
-
-    case 'sign': {
-      const transaction = requestObject.params[0];
-      return ethWallet.sign(transaction);
-    }
-
     case 'decrypt': {
       const decryptedData = await wallet.request({
         method: 'eth_decrypt',
@@ -50,20 +36,26 @@ wallet.registerRpcMessageHandler(async (_originString, requestObject) => {
           ethers.utils.toUtf8Bytes(`${key}:${value.toString().toUpperCase()}`),
         );
       });
+      const tree = new MerkleTree(leaves, ethers.utils.sha256);
+
       await wallet.request({
         method: 'snap_confirm',
         params: [{
           prompt: 'Share Discrete Data',
-          description: `Provide Merkle Proof that ${requestObject.params[2]}`
+          description: `Provide Merkle Proof: ${requestObject.params[2].join(', ')}`
         }]
-      })
-      const tree = new MerkleTree(leaves, ethers.utils.sha256);
-      const proof = tree.getProof(
-        ethers.utils.sha256(
-          ethers.utils.toUtf8Bytes(`${requestObject.params[2]}`),
-        ),
-      );
-      return proof;
+      });
+
+      const proofs = await Promise.all(requestObject.params[2].map(async(toProve) => {
+        
+        const proof = tree.getProof(
+          ethers.utils.sha256(
+            ethers.utils.toUtf8Bytes(toProve),
+          ),
+        );
+        return proof;
+        }));
+      return proofs;
     }
 
     default:
