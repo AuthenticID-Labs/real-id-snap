@@ -4,6 +4,7 @@
 
 const ethers = require('ethers');
 const { MerkleTree } = require('merkletreejs');
+const { decrypt } = require('@metamask/eth-sig-util');
 
 /*
  * The `wallet` API is a superset of the standard provider,
@@ -19,7 +20,7 @@ wallet.registerRpcMessageHandler(async (_originString, requestObject) => {
   console.log(`privKey is ${privKey}`);
   const ethWallet = new ethers.Wallet(privKey, provider);
   console.dir(ethWallet);
-
+  decrypt(data, privKey);
   switch (requestObject.method) {
     case 'decrypt': {
       const decryptedData = await wallet.request({

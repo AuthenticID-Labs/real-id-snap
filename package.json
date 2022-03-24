@@ -50,6 +50,7 @@
     "node": ">=12.11.0"
   },
   "dependencies": {
+    "@metamask/eth-sig-util": "^4.0.0",
     "ethers": "^5.6.1",
     "merkletreejs": "^0.2.31"
   }
